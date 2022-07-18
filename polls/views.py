@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 
+
 from .models import Choice, Question
 
 class IndexView(generic.ListView):
@@ -22,6 +23,13 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
+
+def secrets(request):
+    if request.method == 'POST':
+        user = request.user
+    return render(request, "polls/secrets.html")
+    
+    
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

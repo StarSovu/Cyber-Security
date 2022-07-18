@@ -25,11 +25,9 @@ class ResultsView(generic.DetailView):
     template_name = 'polls/results.html'
 
 def secrets(request):
-    #if request.user.username == 'admin':
-        return render(request, "polls/secrets.html")
-    #return redirect("https://www.youtube.com/watch?v=gvGyS5j9aFY")
-    
-    
+    return render(request, "polls/secrets.html")
+
+   
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

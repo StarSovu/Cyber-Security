@@ -2,9 +2,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-
-
+#from django.contrib.auth.models import User
 from .models import Choice, Question
+from django.shortcuts import redirect
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -25,9 +25,9 @@ class ResultsView(generic.DetailView):
     template_name = 'polls/results.html'
 
 def secrets(request):
-    if request.method == 'POST':
-        user = request.user
-    return render(request, "polls/secrets.html")
+    #if request.user.username == 'admin':
+        return render(request, "polls/secrets.html")
+    #return redirect("https://www.youtube.com/watch?v=gvGyS5j9aFY")
     
     
 

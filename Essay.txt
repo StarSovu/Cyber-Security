@@ -1,0 +1,28 @@
+Project is here, Cyber-Security at StarSovu github.
+Link: https://github.com/StarSovu/Cyber-Security/tree/master
+Project was built by following the Django example mentioned in the cyber security project description.
+
+FLAW 1:
+https://github.com/StarSovu/Cyber-Security/blob/ab128edc7b10a3aeaea5b30a685b16506a3d49a1/polls/views.py#L28
+Polls/views.py, line 28
+
+Description:
+https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+On the admin site /admin/ there is a text 'Secrets' on the title. On that word there is a link to /polls/secrets/. That site is supposed to be private for admin, but anyone can get there by typing the path /polls/secrets or clicking on the link on the admin login site.
+
+How to fix it:
+Adding a check of user, for example:
+if request.user.username == 'admin':
+        return render(request, "polls/secrets.html")
+return redirect("https://www.youtube.com/watch?v=gvGyS5j9aFY")
+A better solution would be to add authentication and give access based on rights and not based on username.
+
+FLAW2:
+https://github.com/StarSovu/Cyber-Security/blob/f85c535b710c847436695fde108699b784593c42/mysite/settings.py#L88
+
+Description:
+https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/
+On the admin site admin can change the password. On this solution password is allowed to be changed to anything, not checking the strength of the password.
+
+How to fix it:
+On mysite/settings.py removing the # on the beginning of lines 88-101. Django has the check by default, but it's possible to disable it to simplyfy development.

@@ -4,7 +4,12 @@ from django.urls import reverse
 from django.views import generic
 #from django.contrib.auth.models import User
 from .models import Choice, Question
-from django.shortcuts import redirect
+#from .forms import NewQuestion
+#from django import forms
+#from django.utils import timezone
+from datetime import datetime
+from django.db import connection
+#from django.shortcuts import redirect
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -25,9 +30,16 @@ class ResultsView(generic.DetailView):
     template_name = 'polls/results.html'
 
 def secrets(request):
-    return render(request, "polls/secrets.html")
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        #sql = ''
 
-   
+        with connection.cursor() as cursor:
+            cursor.execute("INSERT INTO polls_question (pub_date, question_text) VALUES (%s," '%s ' ")", (date, title))
+            #connection.commit()
+            return render(request, "polls/secrets.html")
+    return render(request, "polls/secrets.html")
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

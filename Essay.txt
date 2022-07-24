@@ -25,4 +25,4 @@ https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/
 On the admin site admin can change the password. On this solution password is allowed to be changed to anything, not checking the strength of the password.
 
 How to fix it:
-On mysite/settings.py removing the # on the beginning of lines 88-101. Django has the check by default, but it's possible to disable it to simplyfy development.
+On mysite/settings.py removing the # on the beginning of lines 88-101. Django has the check by default, but it's possible to disable it to simplyfy development. This disabling can be forgotten when publishing the project or it can be left on purpose for some reason.

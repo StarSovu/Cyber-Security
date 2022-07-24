@@ -32,9 +32,19 @@ https://github.com/StarSovu/Cyber-Security/blob/398f6e57fe08c030c84a4697509318ae
 
 Description:
 https://owasp.org/Top10/A03_2021-Injection/
-On the /polls/secrets site user can save a question to the database. I did not manage to get this flaw to 'work', Python and/or Django are not anymore allowing to use '%s'. If that was allowed to use then entering " text ' ), ('wrong time', 'more text " would allow to mess with the times and add several new questions, or of course do something even worse. Even that I did not manage to get this flaw to work I hope I was able to demonstarte how it works.
+On the /polls/secrets site user can save a question to the database. I did not manage to get this flaw to 'work', Python and/or Django are not anymore allowing to use '%s'. If that was allowed to use then entering " text ' ), ('wrong time', 'more text " would allow to mess with the times and add several new questions, or of course do something even worse. Even that I did not manage to get this flaw to work I hope I was able to demonstarte how it works. This flaw could also work as an example of Insecure Design, as anyone is able to enter new questions without any authorisation, content or format checking.
 
 How to fix it:
 Writing directly to database should be avoided, one should use models instead. Or if writing directly to database the content should always be checked and cleaned.
+
+FLAW4:
+https://github.com/StarSovu/Cyber-Security/blob/398f6e57fe08c030c84a4697509318aebd88d5b6/mysite/settings.py#L47
+https://github.com/StarSovu/Cyber-Security/blob/ba856a5e0a6d6ada42fe2f922dc036d80e76a53b/polls/templates/polls/secrets.html#L18
+
+Description:
+CSFR attack vulnerability. CSFR middleware on Django is disabled and CSFR token not included in POST.
+
+How to fix it:
+On the secrets.html template remove <!--  --> (comment tag) around the CSFR token. Enable the middleware by removing # on the settings.py. This is not by far a very good example of CSFR as we are only inputting questions, but of course the content could be something else. It is important to protect all POST actions.
 
 

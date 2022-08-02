@@ -8,4 +8,22 @@
     <p>No polls are available.</p>
 {% endif %}
 
+{% if user.username %}
+{% if user.username == "admin" %}
+
+<p><a href="/polls/add">Add</a></p>
+
+{% else %}
+
+<p>Only admin can add polls.</p>
+
+{% endif %}
+
+{% else %}
+
+<p>Only admin can add polls.</p>
+
+{% endif %}
+
+
 <p><a href="/admin">Admin</a></p>
